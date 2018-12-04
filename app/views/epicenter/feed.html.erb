@@ -1,19 +1,56 @@
 <% if current_user != nil %>
 
-  <h1>@<%= current_user.username %>'s Twitter Feed</h1>
-  <p>Here is what your "friends" are saying:</p>
-
-  <% if current_user.avatar.url != nil %>
-    <%= image_tag current_user.avatar.url, size: 50 %>
-  <% end %>
-
-  <div class="container-fluid">
-    <% @following_tweets.each do |tweet| %>
-      <div>
-        <p>@<%= link_to tweet.user.username, show_user_path(id: tweet.user.id) %></p>
-        <p><%= tweet.message.html_safe %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel panel-heading">
+          <h4>@<%= current_user.username %>'s Twitter Feed</h4>
+          <br />
+          <% if current_user.avatar.url != nil %>
+            <%= image_tag current_user.avatar.url, size: 65 %>
+            <% end %>
+        </div>
+        <div class="panel panel-body">
+          <p><%= current_user.username %></p>
+          <p><%= current_user.name %></p>
+          <p><%= current_user.location %></p>
+          <p><%= current_user.bio %></p>
+        </div>
       </div>
-    <% end %>
+    </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel panel-heading">
+        <h4>Here is what your "friends" are saying:</h4>
+      </div>
+      <div class="panel-body">
+        <% @following_tweets.each do |tweet| %>
+          <div>
+            <% if current_user.avatar.url != nil %>
+              <%= image_tag current_user.avatar.url, size: 65 %>
+              <% end %>
+            <p>@<%= link_to tweet.user.username, show_user_path(id: tweet.user.id) %></p>
+            <p><%= tweet.message.html_safe %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel panel-heading">
+        <h4>Follow/Suggested Follows</h4>
+        </div>
+      <div class="panel panel-body">
+        <p>Ads go here...or whatever else...</p>
+        </div>
+    </div>
+  </div>
+
+</div> <!-- ends row -->
+</div> <!-- ends container -->
 
 <% end %>
