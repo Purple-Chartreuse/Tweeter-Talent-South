@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'all_users' => 'epicenter#all_users'
 
-  get 'sign_out' => 'devise/sessions#new'
+
 
   get 'following' => 'epicenter#following'
 
